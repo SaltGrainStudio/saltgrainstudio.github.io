@@ -1,1 +1,2 @@
-# saltgrainstudio.github.io
+# Salt Grain Studio's Official Website
+## NOT TO BE CONFUSED WITH OTHER SALT GRAINS, THIS ONE IS AN ACTUAL GAME STUDIO
