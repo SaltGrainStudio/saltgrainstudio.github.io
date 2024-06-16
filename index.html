@@ -143,6 +143,41 @@
             margin: 0;
             font-size: 1.2rem;
         }
+        .music-player .record-wrapper {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-right: 1rem;
+        }
+        .music-player .record {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow for better visualization */
+            border: 5px solid #333; /* Add a border to mimic a vinyl record */
+            animation: rotateAlbumArt 4s linear infinite paused; /* Animation initially paused */
+        }
+        .music-player .record::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.5) 60%, transparent 60%);
+            z-index: 1;
+        }
+
+        /* Animation for rotating album art */
+        @keyframes rotateAlbumArt {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -164,10 +199,9 @@
 
     <!-- Music Player -->
     <div class="music-player">
-        <audio id="myAudio">
-            <source src="https://github.com/SaltGrainStudio/saltgrainstudio.github.io/raw/main/music/Asteroids/Starlight%20Odyssey.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="record-wrapper">
+            <img id="albumArt" class="record" src="https://img.itch.zone/aW1nLzE2NDg4MDYzLnBuZw==/180x143%23c/tCjeHS.png" alt="Album Art">
+        </div>
         <div class="song-info">
             <p id="songName">Starlight Odyssey</p>
             <p id="artist">Salt Grain Studio</p>
@@ -180,16 +214,29 @@
 
     <!-- JavaScript for Audio Controls -->
     <script>
-        const audio = document.getElementById('myAudio');
+        const audio = new Audio('https://github.com/SaltGrainStudio/saltgrainstudio.github.io/raw/main/music/Asteroids/Starlight%20Odyssey.mp3');
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
+        const albumArt = document.getElementById('albumArt');
+
+        let isPlaying = false;
 
         playButton.addEventListener('click', () => {
             audio.play();
+            isPlaying = true;
+            albumArt.style.animationPlayState = 'running';
         });
 
         pauseButton.addEventListener('click', () => {
             audio.pause();
+            isPlaying = false;
+            albumArt.style.animationPlayState = 'paused';
+        });
+
+        // Optional: If audio ends, stop animation
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            albumArt.style.animationPlayState = 'paused';
         });
     </script>
 </body>
