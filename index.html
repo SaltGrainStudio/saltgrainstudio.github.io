@@ -10,9 +10,10 @@
     <!-- Font Awesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        /* General styling */
         body {
-            background-color: #2bafff; /* Background color */
-            color: #f7fefe; /* Text color */
+            background-color: #2bafff;
+            color: #f7fefe;
             font-family: 'Pixelify Sans', sans-serif;
             text-align: center;
             margin: 0;
@@ -21,40 +22,44 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         header {
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
         h1 {
-            font-size: 4vw; /* Adjusted font size */
-            color: #f7fefe; /* Text color */
-            text-shadow: 0.1em 0.1em 0.2em #333333; /* Adjusted shadow */
+            font-size: 4vw;
+            color: #f7fefe;
+            text-shadow: 0.1em 0.1em 0.2em #333333;
         }
+
+        /* Widget styling */
         .widget {
-            border: 0.5vw solid #333333; /* Adjusted border */
+            border: 0.5vw solid #333333;
             background-color: #1a1a1a;
             color: #ffffff;
-            width: 70vw; /* Adjusted width */
-            max-width: 600px; /* Added max-width for better responsiveness */
-            height: auto; /* Adjusted height */
+            width: 70vw;
+            max-width: 600px;
+            height: auto;
             display: flex;
             align-items: center;
-            padding: 1.5vw; /* Adjusted padding */
+            padding: 1.5vw;
             box-sizing: border-box;
-            box-shadow: 0.2vw 0.4vw 0.8vw rgba(0, 0, 0, 0.3); /* Adjusted shadow */
+            box-shadow: 0.2vw 0.4vw 0.8vw rgba(0, 0, 0, 0.3);
             transition: transform 0.2s;
+            margin-bottom: 2rem; /* Added margin-bottom for spacing */
         }
         .widget:hover {
             transform: scale(1.02);
         }
         .widget img {
-            width: 30vw; /* Adjusted width */
-            max-width: 180px; /* Added max-width for better responsiveness */
-            height: auto; /* Adjusted height */
+            width: 30vw;
+            max-width: 180px;
+            height: auto;
             object-fit: cover;
-            margin-right: 4vw; /* Adjusted margin */
-            border-radius: 0.5vw; /* Adjusted border radius */
+            margin-right: 4vw;
+            border-radius: 0.5vw;
+            image-rendering: pixelated;
         }
         .widget-content {
             display: flex;
@@ -63,10 +68,10 @@
             align-items: flex-start;
         }
         .widget-title {
-            font-size: 2.5vw; /* Adjusted font size */
+            font-size: 2.5vw;
             margin: 0;
             color: #ffffff;
-            margin-bottom: 1vw; /* Adjusted margin */
+            margin-bottom: 1vw;
         }
         .widget-title a {
             color: inherit;
@@ -76,20 +81,67 @@
             text-decoration: underline;
         }
         .widget-studio-link {
-            color: #ffffff; /* Link color */
+            color: #ffffff;
             text-decoration: none;
-            font-size: 1.5vw; /* Adjusted font size */
-            margin-top: 1vw; /* Adjusted margin */
+            font-size: 1.5vw;
+            margin-top: 1vw;
         }
         .widget-studio-link:hover {
             text-decoration: underline;
         }
         .platform-icons {
-            margin-top: 1vw; /* Adjusted margin */
+            margin-top: 1vw;
         }
         .platform-icons i {
-            font-size: 2vw; /* Adjusted font size */
-            margin-right: 1vw; /* Adjusted margin */
+            font-size: 2vw;
+            margin-right: 1vw;
+        }
+
+        /* Music player styling */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            box-sizing: border-box;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .music-player button {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .music-player button:hover {
+            opacity: 0.7;
+        }
+        .music-player audio {
+            display: none; /* Hide default audio controls */
+        }
+        .music-player .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .music-player .player-controls button {
+            font-size: 1.5rem; /* Increased font size for better visibility */
+        }
+        .music-player .song-info {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 1rem;
+        }
+        .music-player .song-info p {
+            margin: 0;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -104,10 +156,41 @@
                 <h2 class="widget-title"><a href="https://saltgrainstudio.itch.io/asteroids" target="_blank">Asteroids</a></h2>
                 <a class="widget-studio-link" href="https://saltgrainstudio.itch.io" target="_blank">By Salt Grain Studio</a>
                 <div class="platform-icons">
-                    <i class="fab fa-android"></i> <!-- Font Awesome Android icon -->
+                    <i class="fab fa-android"></i>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <audio id="myAudio">
+            <source src="https://github.com/SaltGrainStudio/saltgrainstudio.github.io/raw/main/music/Asteroids/Starlight%20Odyssey.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="song-info">
+            <p id="songName">Starlight Odyssey</p>
+            <p id="artist">Salt Grain Studio</p>
+        </div>
+        <div class="player-controls">
+            <button id="playButton"><i class="fas fa-play"></i></button>
+            <button id="pauseButton"><i class="fas fa-pause"></i></button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Audio Controls -->
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+
+        playButton.addEventListener('click', () => {
+            audio.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audio.pause();
+        });
+    </script>
 </body>
 </html>
